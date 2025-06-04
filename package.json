@@ -1,0 +1,30 @@
+{
+  "name": "evm_sniper",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node executeTrade.js"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@pancakeswap/sdk": "^5.8.14",
+    "@pancakeswap/smart-router": "^7.2.5",
+    "bitquery-protobuf-schema": "^1.2.2",
+    "bs58": "^6.0.0",
+    "dotenv": "^16.5.0",
+    "ethers": "^6.14.3",
+    "fs": "^0.0.1-security",
+    "graphql-request": "^7.2.0",
+    "kafkajs": "^2.2.3",
+    "kafkajs-lz4": "^1.2.1",
+    "lz4": "^0.6.5",
+    "lz4-asm": "^0.4.2",
+    "uuid": "^11.1.0",
+    "viem": "^2.30.5"
+  }
+}
