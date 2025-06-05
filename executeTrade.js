@@ -5,7 +5,8 @@ dotenv.config();
 
 const RPC_URL = 'https://bsc-dataseed.binance.org/';
 const provider = new JsonRpcProvider(RPC_URL);
-const wallet = new Wallet(process.env.PRIVATE_KEY1, provider);
+const privateKey = process.env.PRIVATE_KEY1
+const wallet = new Wallet(privateKey, provider);
 
 // This will hold our “nextNonce” for all outgoing txs
 let nextNonce;
