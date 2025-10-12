@@ -1,86 +1,131 @@
-# BSC Sniper Bot
+# 🚀 Bitquery Sniper Trading Bot
 
-This is the complete codebase of a BSC Sniper Bot for newly created Four Meme tokens. This bot implements on a very simple strategy, which is buying the token as soon as it is created, and then selling it after one minute has passed.
+The **Sniper Trading Bot** is an automated crypto trading tool built for detecting and trading **newly created [Four Meme tokens](https://docs.bitquery.io/docs/blockchain/BSC/four-meme-api?utm_source=github_readme&utm_medium=referral&utm_campaign=evm_sniper&utm_content=four_meme_api&utm_term=four_meme)** in real time.  
+It follows a simple, high-frequency strategy — **buy instantly when the token launches** and **sell automatically after one minute**.
 
-## Getting Newly created Four Meme Tokens
+---
 
-To get the newly created Four Meme tokens as soon as they are created, we are using [Protobuf Kafka](https://docs.bitquery.io/docs/streams/protobuf/chains/Bitcoin-protobuf/) solution provided by Bitquery. Here is an [example](https://docs.bitquery.io/docs/streams/protobuf/kafka-protobuf-js/) code for implementing the solution in JS.
+## 🔍 How It Works: Detecting New Four Meme Tokens
 
-## Buying and Selling  Token
+The bot leverages **[Bitquery’s Protobuf Kafka Streams](https://docs.bitquery.io/docs/category/kafka-streams/?utm_source=github_readme&utm_medium=referral&utm_campaign=evm_sniper&utm_content=protobuf_kafka_docs&utm_term=protobuf_kafka)** to receive token creation events in real-time from the **BSC blockchain**.
 
-To implement the buying and selling of a token, we are utilising the functions of the Four Meme DEX smart contract and wrapping them in our own functions, namely `buyViaLaunchpad` and `sellTokenViaLaunchpad`. We are utilising `ethers` library to create an instance of the contract using the contract address and contract ABI, and then utilising the functions of the same.
+You can check out the **[Kafka Protobuf JS example](https://docs.bitquery.io/docs/streams/protobuf/kafka-protobuf-js/?utm_source=github_readme&utm_medium=referral&utm_campaign=evm_sniper&utm_content=kafka_protobuf_js_example&utm_term=kafka_js_example)** for a step-by-step JavaScript implementation.
 
-## Setup
+**Key features:**
+- Monitors **new token launches** instantly via **Kafka Streams**
+- Reduces latency using **Finland-based (eu-north-1)** deployment
+- Fully integrates with **Bitquery APIs** for event data streaming
 
-1. Clone the repository
+---
 
-```sh
-git clone https://github.com/Kshitij0O7/evm-sniper
-cd evm-sniper
-```
+## 💰 Buying and Selling Tokens Automatically
 
-2. Install the Dependencies
+The bot interacts with the **Four Meme DEX Smart Contract** through `ethers.js`.  
+We define custom wrapper functions:
+- `buyViaLaunchpad` → Buys tokens as soon as they’re created  
+- `sellTokenViaLaunchpad` → Sells after a predefined delay (default: 1 minute)
 
-```sh
-npm install
-```
+Learn more about **[ethers.js contract interaction](https://docs.ethers.org/v5/?utm_source=github_readme&utm_medium=referral&utm_campaign=evm_sniper&utm_content=ethers_docs&utm_term=ethers)** and smart contract ABI usage.
 
-## Running
+---
 
-Create a `.env` file and create the following variables.
-- KAFKA_USERNAME
-- KAFKA_PASSWORD
-- PRIVATE_KEY1
+## ⚙️ Setup Instructions
 
-Run the bot by using this command:
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/Kshitij0O7/evm-sniper?utm_source=github_readme&utm_medium=referral&utm_campaign=evm_sniper&utm_content=repo_link&utm_term=evm-sniper
+   cd evm-sniper
+   ```
 
-```sh
-npm run start
-```
+2. **Install dependencies:**
 
-## Deployment
+   ```sh
+   npm install
+   ```
 
-- Create or Sign into any cloud service provider account. For this tutorial, we have choosen the `Google Cloud`.
+3. **Create your `.env` file** with the following variables:
 
-- Create a VM(virtual machine) instance, and make sure the location is `eu-north-1`, which is in Finland, as the Kafka service we are using is based in Finland. By choosing to run the program on a VM near the Kafka service server, we could ensure minimal lag for recieving newly created tokens.
+   ```env
+   KAFKA_USERNAME=
+   KAFKA_PASSWORD=
+   PRIVATE_KEY1=
+   ```
 
-- Do a SSH login to the VM by following the instructions provided by the the service provider.
+   Contact [Bitquery Support]() or fill out the [form]() to get Kafka stream credentials.
 
-- Install the basic programs such as `git`, `node`, `npm`.
+4. **Run the bot:**
 
-```sh
-sudo apt-get update
-sudo apt-get install -y git curl
+   ```sh
+   npm run start
+   ```
 
-# Install Node.js LTS (20.x, or your preferred)
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-sudo apt-get install -y nodejs
-```
+---
 
-- Check the installations using this command
+## ☁️ Deployment Guide (Google Cloud)
 
-```sh
-node -v
-npm -v
-git --version
-```
+You can deploy the bot to a cloud provider (recommended: **[Google Cloud](https://console.cloud.google.com/?utm_source=github_readme&utm_medium=referral&utm_campaign=evm_sniper&utm_content=gcp_console&utm_term=google_cloud)**) for 24/7 uptime.
 
-- Clone the repository and follow the instructions provided in [setup](#setup).
+### Steps:
 
-- Create a `.env` file from terminal using `nano` command. Once the respective variables are entered, save the file by hitting `CTRL+O`, then hit Enter and exit using `CTRL+X`.
+1. Create a **VM (Virtual Machine)** in region **`eu-north-1`** (Finland) for **minimal latency** to the Bitquery Kafka service.
 
-- Install pm2 and run the script 24*7 using the following commands.
+2. SSH into the VM and install dependencies:
 
-```sh
-sudo npm install -g pm2
-pm2 start index.js --name "evm-sniper"
-```
+   ```sh
+   sudo apt-get update
+   sudo apt-get install -y git curl
+   curl -fsSL https://deb.nodesource.com/setup_20.x?utm_source=github_readme&utm_medium=referral&utm_campaign=evm_sniper&utm_content=node_setup&utm_term=node20 | sudo -E bash -
+   sudo apt-get install -y nodejs
+   ```
 
-- Check the status of the proccess or get logs
+3. Verify installations:
 
-```sh
-pm2 status
-```
-```sh
-pm2 logs evm-sniper
-```
+   ```sh
+   node -v
+   npm -v
+   git --version
+   ```
+
+4. Follow the [setup section](#setup-instructions) above.
+
+5. Install **[pm2 process manager](https://pm2.keymetrics.io/?utm_source=github_readme&utm_medium=referral&utm_campaign=evm_sniper&utm_content=pm2_docs&utm_term=pm2)** to run the bot continuously:
+
+   ```sh
+   sudo npm install -g pm2
+   pm2 start index.js --name "evm-sniper"
+   pm2 status
+   pm2 logs evm-sniper
+   ```
+
+---
+
+## 📊 Tech Stack
+
+| Component                  | Description                           | Docs                                                                                                                                                                                                                  |
+| -------------------------- | ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Bitquery API**           | Blockchain data API for token streams | [bitquery.io](https://bitquery.io/?utm_source=github_readme&utm_medium=referral&utm_campaign=evm_sniper&utm_content=bitquery_home&utm_term=bitquery)                                                                  |
+| **Protobuf Kafka Streams** | Real-time blockchain event streaming  | [Protobuf Docs](https://docs.bitquery.io/docs/streams/protobuf/chains/Bitcoin-protobuf/?utm_source=github_readme&utm_medium=referral&utm_campaign=evm_sniper&utm_content=protobuf_kafka_docs&utm_term=protobuf_kafka) |
+| **ethers.js**              | Smart contract interaction            | [ethers docs](https://docs.ethers.org/v5/?utm_source=github_readme&utm_medium=referral&utm_campaign=evm_sniper&utm_content=ethers_docs&utm_term=ethers)                                                               |
+| **Node.js**                | Runtime environment (20 LTS)          | [NodeSource Setup](https://deb.nodesource.com/setup_20.x?utm_source=github_readme&utm_medium=referral&utm_campaign=evm_sniper&utm_content=node_setup&utm_term=node20)                                                 |
+| **pm2**                    | Process manager for uptime            | [PM2 Docs](https://pm2.keymetrics.io/?utm_source=github_readme&utm_medium=referral&utm_campaign=evm_sniper&utm_content=pm2_docs&utm_term=pm2)                                                                         |
+
+---
+
+## 🧩 Related Resources
+
+* [Bitquery Documentation Hub](https://docs.bitquery.io/?utm_source=github_readme&utm_medium=referral&utm_campaign=evm_sniper&utm_content=bitquery_docs&utm_term=bitquery_docs)
+* [Bitquery IDE](http://ide.bitquery.io/?utm_source=github_readme&utm_medium=referral&utm_campaign=evm_sniper&utm_content=api_playground&utm_term=bitquery_explorer)
+* [Documented Tutorial](https://docs.bitquery.io/docs/streams/sniper-trade-using-bitquery-kafka-stream?utm_source=github_readme&utm_medium=referral&utm_campaign=evm_sniper)
+* [Tutorial Video](https://www.youtube.com/watch?v=vgOHgqTJmj0/?utm_source=github_readme&utm_medium=referral&utm_campaign=evm_sniper)
+---
+
+## 🏁 License
+
+This project is released under the **MIT License**.
+You’re free to use, modify, and distribute — attribution appreciated.
+
+---
+
+### ✨ Created by [Bitquery](https://bitquery.io/?utm_source=github_readme&utm_medium=referral&utm_campaign=evm_sniper&utm_content=bitquery_home&utm_term=bitquery)
+
+Empowering developers with blockchain data APIs and real-time event streams. [Signup](https://account.bitquery.io/auth/signup?redirect_to=https://ide.bitquery.io/?utm_source=github_readme&utm_medium=referral&utm_campaign=evm_sniper) today.
