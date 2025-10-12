@@ -51,7 +51,7 @@ Learn more about **[ethers.js contract interaction](https://docs.ethers.org/v5/?
    PRIVATE_KEY1=
    ```
 
-   Contact [Bitquery Support]() or fill out the [form]() to get Kafka stream credentials.
+Contact [Bitquery Support](https://t.me/Bloxy_info/?utm_source=github_readme&utm_medium=referral&utm_campaign=bitcoin_streaming) or fill out this [form](https://bitquery.io/forms/api/?utm_source=github_readme&utm_medium=referral&utm_campaign=bitcoin_streaming) to get Kafka Credentials.
 
 4. **Run the bot:**
 
