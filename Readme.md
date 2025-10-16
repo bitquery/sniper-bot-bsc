@@ -5,6 +5,9 @@ It follows a simple, high-frequency strategy — **buy instantly when the token 
 
 ---
 
+>[!NOTE]
+>This is an educational purpose project only. Bitquery in no manner advice or promote any trading strategy or trading decision.
+
 ## 🔍 How It Works: Detecting New Four Meme Tokens
 
 The bot leverages **[Bitquery’s Protobuf Kafka Streams](https://docs.bitquery.io/docs/category/kafka-streams/?utm_source=github_readme&utm_medium=referral&utm_campaign=evm_sniper&utm_content=protobuf_kafka_docs&utm_term=protobuf_kafka)** to receive token creation events in real-time from the **BSC blockchain**.
